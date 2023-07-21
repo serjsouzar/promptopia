@@ -3,7 +3,6 @@ import Link from "next/link";
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
 
-
   return (
     <section className='w-full max-w-full flex-start flex-col'>
       <h1 className='head_text text-left'>
@@ -30,7 +29,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             onChange={(e) => setPost({ ...post, prompt: e.target.value })}
             placeholder='Write your post here'
             required
-            className='form_textarea '
+            className='form_textarea'
           />
         </label>
 
