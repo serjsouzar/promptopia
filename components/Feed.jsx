@@ -17,9 +17,11 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-
+  console.log(posts)
   const [searchText, setSearchText] = useState("");
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value)
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -44,8 +46,17 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      
+      <PromptCardList 
+      data={
+        posts.filter((post) => {
+          return searchText.toLowerCase() === ""
+          ? post
+          : post.prompt.toLowerCase().includes(searchText) 
+          || post.prompt.includes(searchText) 
+        })
+      } 
+      handleTagClick={() => {}} />
     </section>
   );
 };
