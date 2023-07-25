@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import { useSession } from "next-auth/react";
 import PromptCard from "./PromptCard";
-
+import Link from "next/link";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -17,10 +17,10 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-  console.log(posts)
+  console.log(posts);
   const [searchText, setSearchText] = useState("");
   const handleSearchChange = (e) => {
-    setSearchText(e.target.value)
+    setSearchText(e.target.value);
   };
 
   useEffect(() => {
@@ -46,17 +46,16 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      
-      <PromptCardList 
-      data={
-        posts.filter((post) => {
+
+      <PromptCardList
+        data={posts.filter((post) => {
           return searchText.toLowerCase() === ""
-          ? post
-          : post.prompt.toLowerCase().includes(searchText) 
-          || post.prompt.includes(searchText) 
-        })
-      } 
-      handleTagClick={() => {}} />
+            ? post
+            : post.prompt.toLowerCase().includes(searchText) ||
+                post.prompt.includes(searchText);
+        })}
+        handleTagClick={() => {}}
+      />
     </section>
   );
 };
